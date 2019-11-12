@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- add in title and also in app.py -->
+        <title> Twitoff!! - {{ username }}'s tweets</title>
+
+    </head>
+
+    <body>
+        <h1> {{ username }}'s Tweets </h1>
+        <p> These are <a href="https://twitter.com/{{username}}">{{ username }}</a>'s last 200 Tweets, excluding replies and Retweets. <br> <br>
+            Click <a href="/">here</a> to go back to the main page.</p>
+
+        <ul>
+            {% for tweet in tweets %}
+            <li>{{ tweet.text }}</li>
+            {% endfor %}
+        </ul>
+
+    </body>
+
+</html>
