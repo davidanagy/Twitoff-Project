@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Import a database; capital for global scope
 DB = SQLAlchemy()
 
+
 # Define User table and Tweet table
 class User(DB.Model):
     """Twitter useres that we analyze"""
