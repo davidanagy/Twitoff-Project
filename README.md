@@ -1,5 +1,5 @@
 # Twitoff-Project
-Writing a web application for comparing and predicting tweets
+Writing a web application for comparing and predicting tweets.
 
 Currently contains the following files (all in the TWITOFF folder):
 
