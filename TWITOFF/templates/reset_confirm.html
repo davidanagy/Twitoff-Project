@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Remove all Users</h2>
+
+<p>Are you sure you want to remove all users? <br>
+<b>This action cannot be reversed!</b></p>
+
+<form action="/reset" method="get">
+    <input type="submit" value="Yes, I'm sure">
+</form>
+
+<form action="/" method="get">
+    <input type="submit" value="No, take me back!">
+</form>
+
+{% endblock %}

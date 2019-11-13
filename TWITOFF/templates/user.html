@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>User: {{ title }}</h2>
+<div class="container">
+    <h2>User: {{ title }}</h2>
 
-<p>{{ message }}</p>
-
-<u1>
-    {% for tweet in tweets %}
-    <li>{{ tweet.id }} - {{ tweet.text }}</li>
-    {% endfor %}
-</u1>
+    <p>{{ message }} <br>
+    <br>
+    <a href="/">Click here</a> to return to the home page.<br></p>
+    <br>
+    <table class="primary">
+        <thead>
+            <tr>
+                <th>Tweet ID</th>
+                <th>Tweet Text</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tweet in tweets%}
+            <tr>
+                <td>{{ tweet.id }}</td>
+                <td>{{ tweet.text }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

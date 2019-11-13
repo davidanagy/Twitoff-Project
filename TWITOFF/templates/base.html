@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <title> Twitoff!! - {{ title }}</title>
             <!-- add in a style sheet from picnicss.com -->
         <link rel="stylesheet" href="https://unpkg.com/picnic">
@@ -8,30 +15,61 @@
     </head>
 
     <body>
-        <h1> Twitoff!! </h1>
+        <div class="text-center">
+            <h1> Twitoff!! </h1>
+        </div>
 
-    <!-- put in a form to get the user -->
     {% block content %}
-    <form action="/user" method="post">
-        <input type="text" name="user_name" placeholder="User to add">
-        <input type="submit" value="Add User">
-    </form>
-
-    <!-- add in form to select users to compare -->
-    <form action="/compare" method="post">
-        <select name="user1">
-            {% for user in users %}
-            <option value = "{{ user.name }}">{{ user.name }}</option>
-            {% endfor %}
-        </select>
-        <select name="user2">
-            {% for user in users %}
-            <option value = "{{ user.name }}">{{ user.name }}</option>
-            {% endfor %}
-        </select>
-        <input type="text" name="tweet_text" placeholder="Tweet text to predict">
-        <input type="submit" value="Compare Users">
-    </form>
+    <br>
+    <p>
+        Twitoff lets you see which of two Twitter users is more likely to tweet a certain statement. <br>
+        Two will enter the Twitoff Arena, and one will win. The victor--and the victim--are up to you alone.
+    </p>
+    <br>
+    <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class ='col-lg-6'>
+            <p>Submit a twitter username to enter them as a Twitoff Contestant!</p>
+            <form action="/user" method="post">
+                <input type="text" name="user_name" placeholder="User to add">
+                <div class="text-center">
+                    <input type="submit" value="Add User">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <div class="text-center">
+                <p>Current Twitoff Contestants:</p>
+                {% for user in users %}
+                <ul><a href="/user/{{user.name}}">{{ user.name }}</a></ul>
+                {% endfor %}
+                <br>
+                <form action="/reset/confirm" method="get">
+                    <input type="submit" value="Remove Contestants">
+                </form>
+            </div>
+        </div>
+    <br>
+    <div class='row d-flex justify-content-center'>
+        <div class="col-lg-6">
+        <p>Now, select two Contestants and a tweet for them to battle over!</p>
+        <form action="/compare" method="post">
+            <select name="user1">
+                {% for user in users %}
+                <option value = "{{ user.name }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="user2">
+                {% for user in users %}
+                <option value = "{{ user.name }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="tweet_text" placeholder="Tweet text to predict">
+            <input type="submit" value="To battle!">
+        </form>
+        </div>
+    </div>
+    </div>
 
     {% endblock %}
     </body>

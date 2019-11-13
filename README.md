@@ -1,32 +1,32 @@
 # Twitoff-Project
 Writing a web application for comparing and predicting tweets.
 
-Currently contains the following files (all in the TWITOFF folder):
+Currently contains the following files (all in the TWITOFF folder).
+Code that was added/changed on November 13 is in bold.
 
 1. __init__.py: Entry point for the app.
 
-2. app.py: Code for the app. Currently gives a list of users in the database,
-with hyperlinks that take you to a page that lists their tweets in the database.
+2. app.py: Code for the app. **Lets you add users to the database,**
+see their tweets, **and predict which of two users is more likely**
+**to tweet a given string of text. (There's also an option to reset the database.)**
 
-3. models.py: Creates classes for the database that contains the tweet data.
+3. fake_data.py: Code for creating fake data and inserting it into the database.
 
-4. twitter.py: Code that enables one to insert user and tweet data into the database,
+4. models.py: Creates classes for the database that contains the tweet data.
+
+5. **predict.py: Code that contains the machine learning model that makes the prediction.**
+
+6. twitter.py: Code that enables one to insert user and tweet data into the database,
 as long as one has the requisite Twitter API keys (and Basilica key). Use the "add_user"
 function to add new users to the database.
 
-5. fake_data.py: Code for creating fake data and inserting it into the database.
+7. db.sqlite3: The database for the app's backend.
 
-6. db.sqlite3: Database; currently contains data for the following Twitter accounts:
-* [@sadserver](https://twitter.com/sadserver)
-* [@dril](https://twitter.com/dril)
-* [@realDonaldTrump](https://twitter.com/realDonaldTrump)
-* [@theshrillest](https://twitter.com/theshrillest)
-* [@HaleyOSomething](https://twitter.com/HaleyOSomething)
-* [@LAClippers](https://twitter.com/LAClippers)
-* [@Chiney321](https://twitter.com/Chiney321)
-* [@BernieSanders](https://twitter.com/BernieSanders)
-
-7. A "templates" folder that contains HTML templates for the app's pages.
-Currently contains two templates:
-* "base.html," for the homepage and a convenient way to reset the database;
-* "user_tweets.html," for displaying the tweets of each user.
+8. A "templates" folder that contains HTML templates for the app's pages.
+Currently contains the following templates:
+* "base.html" **sets the framework for all pages, and contains code for the app's homepage.**
+* **"prediction.html" is the page that displays the prediction.**
+* **"reset_confirm.html" confirms whether or not to wipe the database of all data.**
+* **"reset.html" is the page we see after we wipe the database.**
+* "user_tweets.html" is currently deprecated, but I kept it in for my personal reference.
+* "user.html" shows all the tweets in the database for a given user **in a convenient table format**.

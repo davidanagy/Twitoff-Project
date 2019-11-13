@@ -37,12 +37,25 @@ def create_app():
             if request.method == 'POST':
                 add_user(name)
                 message = f'User {name} successfully added!'
+            else:
+                message = f"Here are {name}'s most recent tweets:"
             tweets = User.query.filter(User.name == name).one().tweets
         except Exception as e:
             message = f'Error adding {name}: {e}'
             tweets = []
         return render_template('user.html', title=name,
                                tweets=tweets, message=message)
+
+    @app.route('/reset')
+    @app.route('/reset/confirm')
+    def reset():
+        if request.path == '/reset/confirm':
+            return render_template('reset_confirm.html',
+                                   title='Reset Confirmation')
+        else:
+            DB.drop_all()
+            DB.create_all()
+            return render_template('reset.html', title='Reset')
 
     # adding in a route for predictions
     @app.route('/compare', methods=['POST'])
@@ -54,16 +67,13 @@ def create_app():
         else:
             prediction = predict_user(user1, user2,
                                       request.values['tweet_text'])
-            message = '"{}" is more likely to be tweeted by {} than {}'.format(
-                request.values['tweet_text'], user1 if prediction else user2,
-                user2 if prediction else user1)
+            message = '"{}" is more likely to be tweeted by {} than {}. \
+                      Therefore, {} wins!'.format(
+                      request.values['tweet_text'],
+                      user1 if prediction else user2,
+                      user2 if prediction else user1,
+                      user1 if prediction else user2)
         return render_template('prediction.html', title='Prediction',
                                message=message)
-
-    @app.route('/reset')
-    def reset():
-        DB.drop_all()
-        DB.create_all()
-        return render_template('base.html', title='Reset', users=[])
 
     return app
