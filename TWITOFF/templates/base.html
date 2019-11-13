@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- add in title and also in app.py -->
         <title> Twitoff!! - {{ title }}</title>
+            <!-- add in a style sheet from picnicss.com -->
+        <link rel="stylesheet" href="https://unpkg.com/picnic">
 
     </head>
 
     <body>
-        <h1> Twitoff rules! </h1>
-        <p> The Twitter users currently in the database are below. <br> <br>
-            Click their name to see their most recent tweets!</p>
+        <h1> Twitoff!! </h1>
 
-        <ul>
+    <!-- put in a form to get the user -->
+    {% block content %}
+    <form action="/user" method="post">
+        <input type="text" name="user_name" placeholder="User to add">
+        <input type="submit" value="Add User">
+    </form>
+
+    <!-- add in form to select users to compare -->
+    <form action="/compare" method="post">
+        <select name="user1">
             {% for user in users %}
-            <li><a href="/user/{{user.name}}">{{ user.name }}</a></li>
+            <option value = "{{ user.name }}">{{ user.name }}</option>
             {% endfor %}
-        </ul>
+        </select>
+        <select name="user2">
+            {% for user in users %}
+            <option value = "{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="tweet_text" placeholder="Tweet text to predict">
+        <input type="submit" value="Compare Users">
+    </form>
 
+    {% endblock %}
     </body>
-
 </html>
