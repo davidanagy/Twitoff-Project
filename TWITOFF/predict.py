@@ -17,10 +17,8 @@ def predict_user(username1, username2, tweet_text, cache=None):
         user1 = User.query.filter(User.name == username1).one()
         user2 = User.query.filter(User.name == username2).one()
         # get the embeddings for the tweets of those users
-        user1_embeddings = np.array([tweet.embedding
-                                     for tweet in user1.tweets])
-        user2_embeddings = np.array([tweet.embedding
-                                     for tweet in user2.tweets])
+        user1_embeddings = user1.embedding
+        user2_embeddings = user2.embedding
         # split those into an erray
         embeddings = np.vstack([user1_embeddings, user2_embeddings])
         labels = np.concatenate([np.ones(len(user1.tweets)),
