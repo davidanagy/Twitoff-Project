@@ -36,15 +36,21 @@ def create_app():
         try:
             if request.method == 'POST':
                 add_user(name)
-                message = f'User {name} successfully added!'
+                message1 = 'User'
+                message2 = ' successfully added!'
             else:
-                message = f"Here are {name}'s most recent tweets:"
-            tweets = User.query.filter(User.name == name).one().tweets
+                message1 = 'These are'
+                message2 = "'s most recent tweets."
+            query = User.query.filter(User.name == name).one()
+            tweets = query.tweets
+            profile = query.profile
         except Exception as e:
-            message = f'Error adding {name}: {e}'
+            message1 = 'Error adding'
+            message2 = f': {e}'
             tweets = []
         return render_template('user.html', title=name,
-                               tweets=tweets, message=message)
+                               tweets=tweets, message1=message1,
+                               message2=message2, profile=profile)
 
     @app.route('/reset')
     @app.route('/reset/confirm')
@@ -73,7 +79,12 @@ def create_app():
                       user1 if prediction else user2,
                       user2 if prediction else user1,
                       user1 if prediction else user2)
+            query1 = User.query.filter(User.name == user1).one()
+            query2 = User.query.filter(User.name == user2).one()
+            profile1 = query1.profile
+            profile2 = query2.profile
         return render_template('prediction.html', title='Prediction',
-                               message=message)
+                               message=message,
+                               profile1=profile1, profile2=profile2)
 
     return app

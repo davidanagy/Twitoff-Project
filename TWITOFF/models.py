@@ -12,6 +12,7 @@ class User(DB.Model):
     """Twitter useres that we analyze"""
     id = DB.Column(DB.BigInteger, primary_key=True)
     name = DB.Column(DB.String(15), nullable=False)
+    profile = DB.Column(DB.String(200), nullable=False)
     newest_tweet_id = DB.Column(DB.BigInteger)
     embedding = DB.Column(DB.PickleType, nullable=False)
 

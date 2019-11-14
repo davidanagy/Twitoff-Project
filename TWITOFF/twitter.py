@@ -22,13 +22,15 @@ def add_user(username, num_tweets=200, exclude_replies=True,
     """Add or update a user and their tweets, or else give an error"""
     try:
         user = TWITTER.get_user(username)
+        profile = user.profile_image_url
         tweets = user.timeline(count=num_tweets,
                                exclude_replies=exclude_replies,
                                include_rts=include_rts, tweet_mode=tweet_mode)
         tweets_text = [tweet.full_text for tweet in tweets]
         embedding = BASILICA.embed_sentences(tweets_text, model='twitter')
         db_user = (User.query.get(user.id) or
-                   User(id=user.id, name=username, embedding=list(embedding)))
+                   User(id=user.id, name=username, profile=profile,
+                        embedding=list(embedding)))
         if tweets:
             db_user.newest_tweet_id = tweets[0].id
         for tweet in tweets:
