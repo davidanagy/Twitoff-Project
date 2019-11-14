@@ -32,8 +32,6 @@ def add_user(username, num_tweets=200, exclude_replies=True,
         if tweets:
             db_user.newest_tweet_id = tweets[0].id
         for tweet in tweets:
-#            embedding = BASILICA.embed_sentence(tweet.full_text,
-#                                                model='twitter')
             db_tweet = Tweet(id=tweet.id, text=tweet.full_text[:300])
             DB.session.add(db_tweet)
             db_user.tweets.append(db_tweet)
