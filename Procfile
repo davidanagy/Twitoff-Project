@@ -1,1 +1,1 @@
-web: gunicorn TWITOFF:APP --log-file - --log-level-debug
+web: gunicorn TWITOFF:APP 
