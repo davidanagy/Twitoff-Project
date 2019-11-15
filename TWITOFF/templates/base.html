@@ -21,12 +21,14 @@
 
     {% block content %}
     <br>
+    <div class="text-center">
     <p>
         Twitoff lets you see which of two Twitter users is more likely to tweet a certain statement. <br>
         Two will enter the Twitoff Arena, and one will win. The victor--and the victim--are up to you alone.
     </p>
+    </div>
     <br>
-    <div class="container-fluid">
+    <div class="container">
     <div class="row d-flex justify-content-center">
         <div class ='col-lg-6'>
             <p>Submit a twitter username to enter them as a Twitoff Contestant!</p>
@@ -43,14 +45,14 @@
                 {% for user in users %}
                 <ul><a href="/user/{{user.name}}">{{ user.name }}</a></ul>
                 {% endfor %}
-                <br>
                 <form action="/reset/confirm" method="get">
                     <input type="submit" value="Remove Contestants">
                 </form>
             </div>
         </div>
     <br>
-    <div class='row d-flex justify-content-center'>
+    <br>
+    <div class="row">
         <div class="col-lg-6">
         <p>Now, select two Contestants and a tweet for them to battle over!</p>
         <form action="/compare" method="post">
@@ -69,6 +71,9 @@
                 <input type="submit" value="To battle!">
             </div>
         </form>
+        </div>
+        <div class="col-lg-4">
+            <img src="https://media.istockphoto.com/vectors/two-blue-birds-fighting-in-a-boxing-ring-vector-id1018715504" style="width:400px;height:350px;">
         </div>
     </div>
     </div>
